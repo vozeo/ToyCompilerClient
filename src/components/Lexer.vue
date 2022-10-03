@@ -47,7 +47,7 @@ function execute() {
         v-model="textarea"
         :rows="23"
         type="textarea"
-        placeholder="请输入代码或点击右边按钮读取代码文件   （不支持代码中出现中文）"
+        placeholder="请输入代码或点击右边按钮读取代码文件   （不支持包含中文字符的代码文件）"
     />
 
     <div id="buttons">
