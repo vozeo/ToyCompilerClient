@@ -1,37 +1,55 @@
 <script setup lang="ts">
-import { ref } from 'vue'
-
 defineProps<{ msg: string }>()
 
-const count = ref(0)
 </script>
 
 <template>
   <h1>Home</h1>
+  <el-row class="tac">
+    <el-col :span="5">
+      <h2 class="mb-2">Menu</h2>
+      <el-menu
+      router
 
-  <div class="card">
-    <button type="button" @click="count++">count is {{ count }}</button>
-    <p>
-      Edit
-      <code>components/HelloWorld.vue</code> to test HMR
-    </p>
+      :default-active="$route.path"
+        class="el-menu-vertical-demo"
+      >
+      <el-menu-item index="/">
+          <el-icon><icon-menu /></el-icon>
+          <span>Home</span>
+        </el-menu-item>
+        <el-menu-item index="/lexer">
+          <el-icon><icon-menu /></el-icon>
+          <span>Lexer</span>
+        </el-menu-item>
+      </el-menu>
+    </el-col>
+    </el-row>
+    <h3>ToyCompile编译器--点击左侧菜单Lexer开始使用</h3>
+  <div id="wrap">
+    
+    <div id="myChart" :style="{width: '1000px', height: '1000px'}"></div>
   </div>
-
-  <p>
-    Check out
-    <a href="https://vuejs.org/guide/quick-start.html#local" target="_blank"
-      >create-vue</a
-    >, the official Vue + Vite starter
-  </p>
-  <p>
-    Install
-    <a href="https://github.com/johnsoncodehk/volar" target="_blank">Volar</a>
-    in your IDE for a better DX
-  </p>
-  <p class="read-the-docs">Click on the Vite and Vue logos to learn more</p>
+  
 </template>
 
 <style scoped>
+
+#inputs {
+  width: 300px;
+}
+
+#wrap {
+  display: flex;
+}
+
+#buttons {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  margin: 0 20px;
+  width: 150px;
+}
 .read-the-docs {
   color: #888;
 }
