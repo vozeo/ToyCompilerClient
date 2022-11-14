@@ -39,9 +39,7 @@ function execute() {
 </script>
 
 <template>
-  <h1>Lexer</h1>
-
-
+  <h2>Lexer</h2>
   <div id="wrap">
     <el-input
         v-model="textarea"
@@ -66,6 +64,7 @@ function execute() {
 </template>
 
 <style scoped>
+
 #wrap {
   display: flex;
   justify-content: space-around;
