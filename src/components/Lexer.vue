@@ -1,5 +1,6 @@
 <script setup lang="ts">
-import {ref} from 'vue';
+import {onMounted, ref} from 'vue';
+import * as echarts from 'echarts'
 
 const textarea = ref('')
 const result = ref('')
@@ -25,11 +26,48 @@ function readFile(event: Event) {
   };
 }
 
+let myChart: any
+onMounted(() => {
+  myChart = echarts.init(document.getElementById('myChart')!!)
+})
+
 let webSocket = new WebSocket(
     'ws://127.0.0.1:40800/compile'
 )
 webSocket.onmessage = function (e) {
   result.value = e.data;
+  let parserData = JSON.parse(e.data).parser;
+  myChart.setOption({
+    tooltip: {
+      trigger: 'item',
+      triggerOn: 'mousemove'
+    },
+    series: [
+      {
+        type: 'tree',
+        data: [parserData],
+        left: '2%',
+        right: '2%',
+        top: '8%',
+        bottom: '20%',
+        symbol: 'emptyCircle',
+        orient: 'vertical',
+        initialTreeDepth: -1,
+        expandAndCollapse: true,
+        label: {
+          position: 'top',
+          fontSize: 9
+        },
+        leaves: {
+          label: {
+            position: 'bottom',
+            align: 'left'
+          }
+        },
+        animationDurationUpdate: 750
+      }
+    ]
+  })
 }
 
 function execute() {
@@ -42,6 +80,7 @@ function execute() {
   <h2>Lexer</h2>
   <div id="wrap">
     <el-input
+        id="inputs"
         v-model="textarea"
         :rows="23"
         type="textarea"
@@ -50,24 +89,28 @@ function execute() {
 
     <div id="buttons">
       <input ref="files" @change="readFile($event)" type="file">
-
       <el-button type="success" @click="execute">开始语法分析</el-button>
     </div>
 
-    <el-input
-        v-model="result"
-        :rows="23"
-        type="textarea"
-        readonly="readonly"
-    />
+<!--    <el-input-->
+<!--        v-model="result"-->
+<!--        :rows="23"-->
+<!--        type="textarea"-->
+<!--        readonly="readonly"-->
+<!--    />-->
+
+    <div id="myChart" :style="{width: '2000px', height: '1000px'}"></div>
   </div>
 </template>
 
 <style scoped>
 
+#inputs {
+  width: 300px;
+}
+
 #wrap {
   display: flex;
-  justify-content: space-around;
 }
 
 #buttons {
@@ -75,5 +118,6 @@ function execute() {
   flex-direction: column;
   justify-content: space-around;
   margin: 0 20px;
+  width: 150px;
 }
 </style>
