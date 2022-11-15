@@ -78,27 +78,29 @@ function execute() {
 
 <template>
   <h1>Lexer</h1>
-  
+
   <div id="wrap">
     <el-row class="tac">
-    <el-col :span="25">
-      <h2 class="mb-2">Menu</h2>
-      <el-menu
-      router
-
-      :default-active="$route.path"
-        class="el-menu-vertical-demo"
-      >
-      <el-menu-item index="/">
-          <el-icon><icon-menu /></el-icon>
-          <span>Home</span>
-        </el-menu-item>
-        <el-menu-item index="/lexer">
-          <el-icon><icon-menu /></el-icon>
-          <span>Lexer</span>
-        </el-menu-item>
-      </el-menu>
-    </el-col>
+      <el-col :span="25">
+        <h2 class="mb-2">Menu</h2>
+        <el-menu
+            router
+            :default-active="$route.path"
+        >
+          <el-menu-item index="/">
+            <el-icon>
+              <icon-menu/>
+            </el-icon>
+            <span>Home</span>
+          </el-menu-item>
+          <el-menu-item index="/lexer">
+            <el-icon>
+              <icon-menu/>
+            </el-icon>
+            <span>Lexer</span>
+          </el-menu-item>
+        </el-menu>
+      </el-col>
     </el-row>
     <el-input
         id="inputs"
@@ -113,14 +115,14 @@ function execute() {
       <el-button type="success" @click="execute">开始语法分析</el-button>
     </div>
 
-<!--    <el-input-->
-<!--        v-model="result"-->
-<!--        :rows="23"-->
-<!--        type="textarea"-->
-<!--        readonly="readonly"-->
-<!--    />-->
+    <!--    <el-input-->
+    <!--        v-model="result"-->
+    <!--        :rows="23"-->
+    <!--        type="textarea"-->
+    <!--        readonly="readonly"-->
+    <!--    />-->
 
-    <div id="myChart" :style="{width: '300px', height: '300px'}"></div>
+    <div id="myChart" :style="{width: '1000px', height: '1000px'}"></div>
   </div>
 </template>
 

@@ -25,7 +25,7 @@ defineProps<{ msg: string }>()
       </el-menu>
     </el-col>
     </el-row>
-    <h3>ToyCompile编译器--点击左侧菜单Lexer开始使用</h3>
+    <h3>ToyCompile<br><br>点击左侧菜单开始使用</h3>
   <div id="wrap">
     
     <div id="myChart" :style="{width: '1000px', height: '1000px'}"></div>
