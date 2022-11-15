@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import {onMounted, ref} from 'vue';
+import {onMounted, ref, inject} from 'vue';
 import * as echarts from 'echarts'
 
 const textarea = ref('')
@@ -34,6 +34,7 @@ onMounted(() => {
 let webSocket = new WebSocket(
     'ws://127.0.0.1:40800/compile'
 )
+const axios: any = inject('axios')
 webSocket.onmessage = function (e) {
   result.value = e.data;
   let parserData = JSON.parse(e.data).parser;
@@ -68,6 +69,19 @@ webSocket.onmessage = function (e) {
       }
     ]
   })
+  axios.get('/file', {responseType: 'blob'})
+      .then((res: { data: any; }) => {
+        let data = res.data
+        let url = window.URL.createObjectURL(new Blob([data]))
+        let a = document.createElement('a')
+        a.style.display = 'none'
+        a.href = url
+        a.setAttribute('download', 'parser.pdf')
+        document.body.appendChild(a)
+        a.click()
+        window.URL.revokeObjectURL(a.href)
+        document.body.removeChild(a)
+      })
 }
 
 function execute() {
