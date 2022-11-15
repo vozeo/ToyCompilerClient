@@ -77,8 +77,29 @@ function execute() {
 </script>
 
 <template>
-  <h2>Lexer</h2>
+  <h1>Lexer</h1>
+  
   <div id="wrap">
+    <el-row class="tac">
+    <el-col :span="25">
+      <h2 class="mb-2">Menu</h2>
+      <el-menu
+      router
+
+      :default-active="$route.path"
+        class="el-menu-vertical-demo"
+      >
+      <el-menu-item index="/">
+          <el-icon><icon-menu /></el-icon>
+          <span>Home</span>
+        </el-menu-item>
+        <el-menu-item index="/lexer">
+          <el-icon><icon-menu /></el-icon>
+          <span>Lexer</span>
+        </el-menu-item>
+      </el-menu>
+    </el-col>
+    </el-row>
     <el-input
         id="inputs"
         v-model="textarea"
@@ -99,7 +120,7 @@ function execute() {
 <!--        readonly="readonly"-->
 <!--    />-->
 
-    <div id="myChart" :style="{width: '2000px', height: '1000px'}"></div>
+    <div id="myChart" :style="{width: '300px', height: '300px'}"></div>
   </div>
 </template>
 
@@ -111,6 +132,7 @@ function execute() {
 
 #wrap {
   display: flex;
+  margin-right: 200px;
 }
 
 #buttons {
